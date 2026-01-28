@@ -9,7 +9,9 @@ uploaded_file = st.file_uploader("Choose an Excel file", type=["xlsx", "xls"])
 
 if uploaded_file:
     try:
-        data = pd.read_excel(uploaded_file)
+        # ✅ Force engine to avoid "Import openpyxl failed" issues
+        data = pd.read_excel(uploaded_file, engine="openpyxl")
+
         st.success("Excel file loaded successfully!")
         st.dataframe(data.head())
 
